@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Number Guesser</title>
+    <link rel="stylesheet" type="text/css" href="reset.css"/>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=true;">
+  </head>
+
+  <body>
+    <header>
+      <h1><div class="pinkNumber">Number</div> <div class="whiteGuesser">Guesser</div></h1>
+    </header>
+
+    <section class="input-wrapper">
+    <section class="min-max-wrapper">
+      <input class="min-value" type="number" name="min-value" placeholder="Min">
+
+      <input class="max-value" type="number" name="max-value" placeholder="Max">
+
+      <button class="submit" type="button" name="submit-range">Submit Range</button>
+    </section>
+
+      <input class="user-data" type="text" name="userData" placeholder="Enter your guess">
+      <br>
+
+      <div class="topButtons">
+        <button class="guess" type="button" name="guess" disabled>Guess</button>
+
+        <button class="clear" type="button" value="reset" disabled>Clear</button>
+      </div>
+
+      <p class="your-last-guess"></p>
+      <br>
+
+      <div class="last-guess">
+      </div>
+
+      <div>
+        <p class="result-text">
+
+        </p>
+      </div>
+
+      <br>
+      <button class="resetButton" type="button" name="reset" disabled>Reset</button>
+    </section>
+  </body>
+
+  <script type="text/javascript" src="javascript.js"></script>
+
+</html>
