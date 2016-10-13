@@ -106,7 +106,7 @@ button:hover {
   font-size: 20px;
 }
 
-.guess:disabled, .clear:disabled, .resetButton:disabled {
+.guess:disabled, .clear:disabled, .resetButton:disabled, .submit:disabled {
   background-color: #e5e5e5;
 }
 
@@ -127,14 +127,14 @@ button:hover {
     width:340px;
     margin-top: 250px;
   }
-.last-guess {
-  font-size: 180px;
-}
-.your-last-guess, .result-text {
-  font-size: 18px;
-}}
+  .last-guess {
+    font-size: 180px;
+  }
+  .your-last-guess, .result-text {
+    font-size: 18px;
+  }
 
-.min-value, .max-value, .user-data {
-width: 330px;
-margin-top: 20px;
-}
+  .min-value, .max-value, .user-data {
+    width: 330px;
+    margin-top: 20px;
+  }}

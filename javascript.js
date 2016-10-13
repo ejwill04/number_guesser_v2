@@ -1,108 +1,115 @@
-// making variables for our buttons to use later. going into the index, finding the button tags, using the class to select where to get buttons//
-var guessButton = document.querySelector('.guess');
+//create variables to access our buttons//
 var clearButton = document.querySelector('.clear');
 var resetButton = document.querySelector('.resetButton');
 var minMaxButton = document.querySelector('.submit');
-// var buttons = document.querySelector('.guess', '.clear', '.resetBu')
+var guessButton = document.querySelector('.guess');
+
+//create variables to access each of our input fields//
 var inputField = document.querySelector('.user-data');
 var minValue = document.querySelector('.min-value');
 var maxValue = document.querySelector('.max-value');
+
+//create variable to store a randomNumber once the event listener has been triggered//
 var randomNumber;
 
-//old randoNum
-//var randoNum = Math.floor(Math.random()* 100)+1;
+//store random number from randoNum() once event listener has been triggered.//
+//prompts user to enter a number between min and max//
 minMaxButton.addEventListener('click', function(){
   randomNumber = randoNum();
+  document.querySelector('.your-last-guess').innerText = "Please enter a number " + getMin() + " and " + getMax() + "!";
 });
 
+//Creates a random number based off user's min/max inputs//
 function randoNum() {
-var min = parseInt(document.querySelector('.min-value').value);
-var max =  parseInt(document.querySelector('.max-value').value);
-return Math.floor(Math.random() * (max-min))+min;
+  var min = parseInt(document.querySelector('.min-value').value);
+  var max =  parseInt(document.querySelector('.max-value').value);
+  return Math.floor(Math.random() * (max-min))+min;
 }
 
-//the guess button. When clickd, run the functions//
+//Clicking the guess button triggers a number display and message.
+//minMaxTest checks that the min is less than the max and runs mainFunc if true.  Displays error message if false.//
 guessButton.addEventListener('click', function(){
-numberDisplay();
-minMaxTest();
+  numberDisplay();
+  minMaxTest();
 // mainFunc();
 });
 
 //the clear button. When clicked, set the user data to "" (blank)//
 clearButton.addEventListener('click', function() {
-document.querySelector('.user-data').value = "";
+  document.querySelector('.user-data').value = "";
 });
 
 //the reset button. When clicked, run the function to reload the page//
 resetButton.addEventListener('click', function() {
-location.reload();
+  location.reload();
 });
 
+//not working on min and max values//
+//disables the clear and reset buttons if input is empty//
 inputField.addEventListener('input', function() {
-  if(inputField.value === ''){
+  if(inputField.value === '' || minValue.value === '' || maxValue.value === ''){
     clearButton.disabled = true;
+    resetButton.disabled = true;
+    guessButton.disabled = true;
   }else{
     clearButton.disabled = false;
+    resetButton.disabled = false;
+    guessButton.disabled = false;
   }});
 
-inputField.addEventListener('input', function() {
-  if(inputField.value === ''){
-      resetButton.disabled = true;
-  }else{
-      resetButton.disabled = false;
+//disables minMaxButton when maxValue is empty//
+//doesn't seem to work on page load.//
+  maxValue.addEventListener('input', function() {
+    if(maxValue.value === ''){
+      minMaxButton.disabled = true;
+    }else{
+      minMaxButton.disabled = false;
     }});
 
-inputField.addEventListener('input', function() {
-  if(inputField.value === ''){
-      guessButton.disabled = true;
-  }else{
-      guessButton.disabled = false;
-    }});
-//
-
+//test that the min is less than the max.  runs mainFunc if true//
 function minMaxTest() {
   if (getMin() < getMax()) {
-  mainFunc();
+    mainFunc();
   } else {
-  displayError();
-  }
-}
+    displayInvalidMinMax();
+  }}
+//this function and the betweenMinMax may be able to be combined//
 
-//the main function. if number is 1-100,compare the numbers. If not, display an error message//
+//the main function. if number is between min and max,compare the numbers. If not, display an error message//
 function mainFunc() {
-if (betweenMinMax()) {
-  compareNumbers();
+  if (betweenMinMax()) {
+    compareNumbers();
 } else {
    displayError();
-}
-}
+}}
 
 //the comparing numbers fuction. If the users guess is greater than the randomly generated number, run the function that says "your guess is too high". If not, move down.If the users guess is less than the randomly generated number, run the function that says "your guess is too low". If not, continue to go through the function. If the users guess is neither of these, run the function that says "you guessed correctly"
 function compareNumbers() {
-if (userGuess()>randomNumber) {
-tooHigh();
-} else if(userGuess()<randomNumber){
-tooLow();
-} else {
-correct();
-}
-}
+  if (userGuess()>randomNumber) {
+    tooHigh();
+  } else if(userGuess()<randomNumber){
+    tooLow();
+  } else {
+    correct();
+}}
 
-
-//this function finds if the users guess is greater than or equal to 1 and less than or equal to 100 and returns the answer to us//
+//this function finds if the users guess is greater than or equal to min and less than or equal to max and returns the answer to us//
 function betweenMinMax() {
   return userGuess()>=getMin() && userGuess()<=getMax();
 }
 
-function disableClear() {
-  var inputLength = (document.querySelector('.user-data').value);
-  if (input.length < 1)
-  document.querySelector('.user-data').disabled = true;
-}
+//disable clear button if user has not input anything//
+// function disableClear() {
+//   var inputLength = (document.querySelector('.user-data').value);
+//   var minLength = (document.querySelector('.min-value').value);
+//   var maxLength = (document.querySelector('.max-value').value);
+//   if (inputlength.length < 1 || minLength.length < 1 || maxLength.length < 1)
+//   document.querySelector('.resetButton').disabled = true;
+// }
 
 //this defines the users guess as a function. to find the users guess, we go into the document and find the value of user-data. we then return it as a number instead of a string using "parseINT"//
 function userGuess() {
-return parseInt(document.querySelector('.user-data').value);
+  return parseInt(document.querySelector('.user-data').value);
 }
 
 function getMin() {
@@ -116,41 +123,35 @@ function getMax() {
 
 //this function finds the result-text field in the document and puts the text "too high" into it//
 function tooHigh() {
-document.querySelector('.result-text').innerText = "That is too high";
+  document.querySelector('.result-text').innerText = "That is too high";
 }
 
 //this function finds the result-text field in the document and puts the text "too low" into it//
 function tooLow() {
-document.querySelector(".result-text").innerText = "That is too low";
+  document.querySelector(".result-text").innerText = "That is too low";
 }
 
 //this function finds the result-text field in the document and puts the text "wow you got it" into it//
 function correct() {
-document.querySelector(".result-text").innerText = "Wow! You got it!";
+  document.querySelector(".result-text").innerText = "Wow! You got it!";
 }
 
 //part of the "mainFunc". When guess is clicked, numbers need to display. In the your-last-guess field, we put "your last guess" into the document and we display the users guess underneath//
 function numberDisplay() {
-document.querySelector('.your-last-guess').innerText = "Your last guess was";
-document.querySelector('.last-guess').innerText = userGuess();
+  document.querySelector('.your-last-guess').innerText = "Your last guess was";
+  document.querySelector('.last-guess').innerText = userGuess();
 resetButton.style.margin = "20px 0 0 0";
 }
 
-//this function displays an error message when the user does not enter a number 1-100. We empty the result-text and last-guess feilds, and simply leave the message "please enter a number 1-100"//
+//displays error when users's number is not between min and max
 function displayError() {
-document.querySelector('.result-text').innerText = "";
-document.querySelector('.last-guess').innerText = "";
-document.querySelector('.your-last-guess').innerText = "Please enter a number " + getMin() + " and " + getMax() + "!";
+  document.querySelector('.result-text').innerText = "";
+  document.querySelector('.last-guess').innerText = "";
+  document.querySelector('.your-last-guess').innerText = "Please enter a number " + getMin() + " and " + getMax() + "!";
 }
-
-//two input boxes
-//min: box
-//input class "min-value"
-//in JS, we'll grab min-value and convert into a variable
-
-//function
-//we want to check that the min-value is a number
-//we want to check that the min-value is less than the max value
-//we will need to change the random number to be within the range
-
-//if both of these conditions are true, we want to replace the existing minimum value with the user generated min-value
+//displays error when min is greater than max
+function displayInvalidMinMax() {
+  document.querySelector(".your-last-guess").innerText = "Enter valid min and max";
+  document.querySelector('.result-text').innerText = "";
+  document.querySelector('.last-guess').innerText = "";
+}
