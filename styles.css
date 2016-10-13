@@ -19,7 +19,6 @@ header div {
 header .pinkNumber {
   color: #ED458B;
   font-weight: bold;
-
 }
 
 header .whiteGuesser {
@@ -29,8 +28,10 @@ header .whiteGuesser {
 
 .input-wrapper {
   text-align: center;
-  /*margin: 10px 0;*/
+  max-width: 1000px;
+ margin: auto;
 }
+
 .user-data {
  width:550px;
  height:40px;
@@ -38,6 +39,7 @@ header .whiteGuesser {
 
 .max-value, .min-value {
   width: 100px;
+  margin-left: 45px;
 }
 
 .min-max-wrapper {
@@ -60,11 +62,8 @@ input {
   text-align: center;
 }
 
-.submit {
-}
-
 button {
-  background-color: #d0d2d3;
+  background-color: #aeaeaf;
   color: #ffffff;
   border-radius: 25px;
   width: 228px;
@@ -87,11 +86,13 @@ button:hover {
   font-size: 26px;
   font-weight: lighter;
 }
+
 .result-text {
   margin-top: 10px;
 }
+
 .your-last-guess {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .last-guess {
@@ -106,8 +107,30 @@ button:hover {
   font-size: 20px;
 }
 
-.guess:disabled, .clear:disabled, .resetButton:disabled, .submit:disabled {
+.guess:disabled, .clear:disabled, .resetButton:disabled, .submit:disabled  {
   background-color: #e5e5e5;
+}
+
+input:disabled {
+  background-color: #fff;
+  color: white;
+  border: #eaeaea solid 1px;
+}
+
+input[type="text"].user-data::-webkit-input-placeholder {
+   color: #eaeaea;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #eaeaea;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #eaeaea;
+}
+
+:-ms-input-placeholder {
+   color: #eaeaea;
 }
 
 @media screen and (max-width: 570px) {
@@ -125,8 +148,13 @@ button:hover {
   }
   .resetButton {
     width:340px;
-    margin-top: 250px;
+    margin-top: 180px;
   }
+
+  .user-data {
+    width: 330px;
+  }
+
   .last-guess {
     font-size: 180px;
   }
@@ -134,7 +162,7 @@ button:hover {
     font-size: 18px;
   }
 
-  .min-value, .max-value, .user-data {
+  .min-value, .max-value {
     width: 330px;
     margin-top: 20px;
-  }}
+}}
