@@ -46,29 +46,29 @@ inputField.addEventListener('input', function() {
     clearButton.disabled = false;
     resetButton.disabled = false;
     guessButton.disabled = false;
-  }});
+}});
 
 //enables inputField when minValue has a value//
-  minMaxButton.addEventListener('click', function() {
-if (minValue.value !== '') {
-  inputField.disabled = false;
- } else {
-      inputField.disabled = true;
-    }});
+minMaxButton.addEventListener('click', function() {
+  if (minValue.value !== '') {
+    inputField.disabled = false;
+  } else {
+  inputField.disabled = true;
+}});
 
 //disables minMaxButton when maxValue is empty//
-  maxValue.addEventListener('input', function() {
-    if(maxValue.value === ''){
-      minMaxButton.disabled = true;
-    }else{
-      minMaxButton.disabled = false;
-    }});
+maxValue.addEventListener('input', function() {
+  if(maxValue.value === ''){
+    minMaxButton.disabled = true;
+  }else{
+    minMaxButton.disabled = false;
+}});
 
 //Creates a random number based off user's min/max inputs//
 function randoNum() {
   var min = parseInt(document.querySelector('.min-value').value);
   var max =  parseInt(document.querySelector('.max-value').value);
-  return Math.floor(Math.random() * (max-min))+min;
+  return Math.floor(Math.random() * (max-min))+ min;
 }
 
 //test that the min is less than the max.  runs mainFunc if true//
